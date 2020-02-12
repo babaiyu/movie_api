@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Movie Api</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="change_language">Change Language</string>
+    <string name="image_banner">Image Banner</string>
+    <string name="item_title">Item Title</string>
+    <string name="item_release">Item Release</string>
+    <string name="item_description">Item Description</string>
+    <string name="progress_bar">Progress Bar</string>
+</resources>
