@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.babaiyu.movieapi.R
@@ -23,6 +24,11 @@ import kotlin.collections.ArrayList
 
 @RequiresApi(Build.VERSION_CODES.N)
 class TVFragment : Fragment() {
+    companion object {
+        const val ID = "id"
+        const val TYPE = "type"
+    }
+
     private lateinit var rvTv: RecyclerView
     private lateinit var tvViewModel: CardViewModel
     private var stateData: ArrayList<DataItems> = arrayListOf()
@@ -67,8 +73,11 @@ class TVFragment : Fragment() {
             if (item != null) {
                 setData(item)
                 cardTvAdapter.onItemClick = { data ->
-                    Toast.makeText(activity, "${data.id}", Toast.LENGTH_SHORT).show()
-                    Log.d("DATA SELECTED", "${data.id}")
+                    val mBundle = Bundle()
+                    mBundle.putInt(ID, data.id)
+                    mBundle.putString(TYPE, type)
+                    view!!.findNavController()
+                        .navigate(R.id.action_navigation_tv_to_detailFragment, mBundle)
                 }
                 showLoading(false)
             }

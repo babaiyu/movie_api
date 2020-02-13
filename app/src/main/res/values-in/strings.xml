@@ -8,5 +8,4 @@
     <string name="item_title">Item Judul</string>
     <string name="item_release">Item Rilis</string>
     <string name="item_description">Item Deskripsi</string>
-    <string name="progress_bar">Bar Proses</string>
 </resources>

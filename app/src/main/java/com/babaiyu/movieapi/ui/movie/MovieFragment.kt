@@ -1,5 +1,6 @@
 package com.babaiyu.movieapi.ui.movie
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +10,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.babaiyu.movieapi.DetailFragment
 import com.babaiyu.movieapi.R
 import com.babaiyu.movieapi.components.CardAdapter
 import com.babaiyu.movieapi.models.CardViewModel
@@ -23,6 +29,11 @@ import kotlin.collections.ArrayList
 
 @RequiresApi(Build.VERSION_CODES.N)
 class MovieFragment : Fragment() {
+    companion object {
+        const val ID = "id"
+        const val TYPE = "type"
+    }
+
     private lateinit var rvMovies: RecyclerView
     private lateinit var movieViewModel: CardViewModel
     private var stateData: ArrayList<DataItems> = arrayListOf()
@@ -67,8 +78,11 @@ class MovieFragment : Fragment() {
             if (item != null) {
                 setData(item)
                 cardMoviesAdapter.onItemClick = { data ->
-                    Toast.makeText(activity, "${data.id}", Toast.LENGTH_SHORT).show()
-                    Log.d("DATA SELECTED", "${data.id}")
+                    val mBundle = Bundle()
+                    mBundle.putInt(ID, data.id)
+                    mBundle.putString(TYPE, type)
+                    view!!.findNavController()
+                        .navigate(R.id.action_navigation_movie_to_detailFragment, mBundle)
                 }
                 showLoading(false)
             }

@@ -9,12 +9,33 @@
         android:id="@+id/navigation_movie"
         android:name="com.babaiyu.movieapi.ui.movie.MovieFragment"
         android:label="@string/title_movie"
-        tools:layout="@layout/fragment_movie" />
+        tools:layout="@layout/fragment_movie">
+        <action
+            android:id="@+id/action_navigation_movie_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_tv"
         android:name="com.babaiyu.movieapi.ui.tv.TVFragment"
         android:label="@string/title_tv"
-        tools:layout="@layout/fragment_tv" />
+        tools:layout="@layout/fragment_tv">
+        <action
+            android:id="@+id/action_navigation_tv_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.babaiyu.movieapi.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_navigation_movie2"
+            app:destination="@id/navigation_movie" />
+        <action
+            android:id="@+id/action_detailFragment_to_navigation_tv2"
+            app:destination="@id/navigation_tv" />
+    </fragment>
 
 </navigation>
