@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Movie Api</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_tv">TV Show</string>
     <string name="change_language">Change Language</string>
     <string name="image_banner">Image Banner</string>
     <string name="item_title">Item Title</string>

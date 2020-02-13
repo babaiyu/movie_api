@@ -15,7 +15,8 @@ class CardViewModel : ViewModel() {
         private const val API_KEY = "cf351551b4b72640578e20445eebffd6"
     }
 
-    val listModel = MutableLiveData<ArrayList<DataItems>>()
+    val listMovie = MutableLiveData<ArrayList<DataItems>>()
+    val listTV = MutableLiveData<ArrayList<DataItems>>()
 
     internal fun setData(type: String, language: String) {
         val client = AsyncHttpClient()
@@ -38,14 +39,41 @@ class CardViewModel : ViewModel() {
                         val data = list.getJSONObject(i)
                         val dataItems = DataItems()
                         val getPhoto = data.getString("poster_path")
+                        val checkDescription = data.getString("overview")
+
                         dataItems.id = data.getInt("id")
-                        dataItems.title = data.getString("title")
-                        dataItems.release = data.getString("release_date")
-                        dataItems.description = data.getString("overview")
+                        dataItems.title = data.getString(
+                            if (type == "movie") {
+                                "title"
+                            } else {
+                                "name"
+                            }
+                        )
+                        dataItems.release = data.getString(
+                            if (type == "movie") {
+                                "release_date"
+                            } else {
+                                "first_air_date"
+                            }
+                        )
+                        dataItems.description = if (checkDescription.isEmpty()) {
+                            if (language == "en") {
+                                "No Description"
+                            } else {
+                                "Tidak ada Deskripsi"
+                            }
+                        } else {
+                            checkDescription
+                        }
                         dataItems.photo = "https://image.tmdb.org/t/p/w185/$getPhoto"
+
                         listItems.add(dataItems)
                     }
-                    listModel.postValue(listItems)
+                    if (type == "movie") {
+                        listMovie.postValue(listItems)
+                    } else {
+                        listTV.postValue(listItems)
+                    }
                 } catch (err: Exception) {
                     Log.d("Exception", err.message.toString())
                 }
@@ -62,7 +90,11 @@ class CardViewModel : ViewModel() {
         })
     }
 
-    internal fun getData(): LiveData<ArrayList<DataItems>> {
-        return listModel
+    internal fun getData(type: String): LiveData<ArrayList<DataItems>> {
+        return if (type == "movie") {
+            listMovie
+        } else {
+            listTV
+        }
     }
 }

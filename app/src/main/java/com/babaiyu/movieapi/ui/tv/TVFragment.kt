@@ -1,4 +1,4 @@
-package com.babaiyu.movieapi.ui.movie
+package com.babaiyu.movieapi.ui.tv
 
 import android.os.Build
 import android.os.Bundle
@@ -22,9 +22,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 @RequiresApi(Build.VERSION_CODES.N)
-class MovieFragment : Fragment() {
-    private lateinit var rvMovies: RecyclerView
-    private lateinit var movieViewModel: CardViewModel
+class TVFragment : Fragment() {
+    private lateinit var rvTv: RecyclerView
+    private lateinit var tvViewModel: CardViewModel
     private var stateData: ArrayList<DataItems> = arrayListOf()
 
     override fun onCreateView(
@@ -32,10 +32,10 @@ class MovieFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root: View = inflater.inflate(R.layout.fragment_movie, container, false)
+        val root: View = inflater.inflate(R.layout.fragment_tv, container, false)
 
-        rvMovies = root.findViewById(R.id.recyclerMovie)
-        rvMovies.setHasFixedSize(true)
+        rvTv = root.findViewById(R.id.recyclerTv)
+        rvTv.setHasFixedSize(true)
 
         componentDidMount()
 
@@ -52,21 +52,21 @@ class MovieFragment : Fragment() {
 
     private fun componentDidMount() {
         // Set Adapter
-        rvMovies.layoutManager = LinearLayoutManager(activity)
-        val cardMoviesAdapter = CardAdapter(stateData)
-        rvMovies.adapter = cardMoviesAdapter
+        rvTv.layoutManager = LinearLayoutManager(activity)
+        val cardTvAdapter = CardAdapter(stateData)
+        rvTv.adapter = cardTvAdapter
 
         // Model
-        val type = "movie"
-        movieViewModel = ViewModelProvider(
+        val type = "tv"
+        tvViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(CardViewModel::class.java)
-        movieViewModel.setData(type, setLanguage())
-        movieViewModel.getData(type).observe(this, Observer { item ->
+        tvViewModel.setData(type, setLanguage())
+        tvViewModel.getData(type).observe(this, Observer { item ->
             if (item != null) {
                 setData(item)
-                cardMoviesAdapter.onItemClick = { data ->
+                cardTvAdapter.onItemClick = { data ->
                     Toast.makeText(activity, "${data.id}", Toast.LENGTH_SHORT).show()
                     Log.d("DATA SELECTED", "${data.id}")
                 }

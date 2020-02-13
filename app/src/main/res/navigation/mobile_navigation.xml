@@ -8,13 +8,13 @@
     <fragment
         android:id="@+id/navigation_movie"
         android:name="com.babaiyu.movieapi.ui.movie.MovieFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_movie"
         tools:layout="@layout/fragment_movie" />
 
     <fragment
         android:id="@+id/navigation_tv"
-        android:name="com.babaiyu.movieapi.ui.tv.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.babaiyu.movieapi.ui.tv.TVFragment"
+        android:label="@string/title_tv"
         tools:layout="@layout/fragment_tv" />
 
 </navigation>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FILM API</string>
+    <string name="title_movie">Film</string>
+    <string name="title_tv">Acara TV</string>
+    <string name="change_language">Ganti Bahasa</string>
+    <string name="image_banner">Spanduk Gambar</string>
+    <string name="item_title">Item Judul</string>
+    <string name="item_release">Item Rilis</string>
+    <string name="item_description">Item Deskripsi</string>
+    <string name="progress_bar">Bar Proses</string>
+</resources>

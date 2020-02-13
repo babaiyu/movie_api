@@ -9,15 +9,9 @@ import com.babaiyu.movieapi.models.DataItems
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.card_item.view.*
 
-class CardAdapter : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
-    private val mData = ArrayList<DataItems>()
-
-    fun setData(items: ArrayList<DataItems>) {
-        mData.clear()
-        mData.addAll(items)
-        notifyDataSetChanged()
-    }
-
+class CardAdapter(private val mData: ArrayList<DataItems>) :
+    RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
+    var onItemClick: ((DataItems) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val mView = LayoutInflater.from(parent.context).inflate(R.layout.card_item, parent, false)
@@ -29,6 +23,7 @@ class CardAdapter : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.bind(mData[position])
     }
+
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: DataItems) {
             with(itemView) {
@@ -38,6 +33,12 @@ class CardAdapter : RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
                 Glide.with(itemView.context)
                     .load(item.photo)
                     .into(item_img)
+            }
+        }
+
+        init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(mData[adapterPosition])
             }
         }
     }
